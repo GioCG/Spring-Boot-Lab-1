@@ -1,10 +1,8 @@
 package com.giovannicarrera.webapp.biblioteca.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.giovannicarrera.webapp.biblioteca.model.Categoria;
 import com.giovannicarrera.webapp.biblioteca.repository.CategoriaRepository;
 
@@ -20,8 +18,8 @@ public class CategoriaService implements ICategoriaService{
     }
 
     @Override
-    public void guardarCategoria(Categoria categoria) {
-       categoriaRepository.save(categoria);
+    public Categoria guardarCategoria(Categoria categoria) {
+      return categoriaRepository.save(categoria);
     }
 
     @Override
