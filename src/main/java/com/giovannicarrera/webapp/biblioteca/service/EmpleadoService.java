@@ -3,10 +3,12 @@ package com.giovannicarrera.webapp.biblioteca.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.giovannicarrera.webapp.biblioteca.model.Empleado;
 import com.giovannicarrera.webapp.biblioteca.repository.EmpleadoRepository;
 
+@Service
 public class EmpleadoService implements IEmpleadoService{
 
     

@@ -29,9 +29,13 @@ public class CategoriaController {
 
     //listar
     @GetMapping("/")
-    public List<Categoria> ListarCategorias(){
-        return categoriaService.ListarCategoria();
-    }
+    public ResponseEntity<List<Categoria>> listarCategoria(){
+       try {
+            return  ResponseEntity.ok(categoriaService.ListarCategoria());
+       } catch (Exception e) {
+            return  ResponseEntity.badRequest().body(null);
+       }
+    } 
     // buscar
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> busCategoriaPorId(@PathVariable Long id){
