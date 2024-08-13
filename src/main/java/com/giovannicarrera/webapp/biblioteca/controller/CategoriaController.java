@@ -74,10 +74,16 @@ public class CategoriaController {
         Map<String,String> response = new HashMap<>();
         try {
             Categoria categoria = categoriaService.busCategoriaPorId(id);
+            if(!categoriaService.verificarCategoriaDuplicada(categoria)){
             categoria.setNombre(categoriaNuevo.getNombre());
             categoriaService.guardarCategoria(categoria);
             response.put("message", "La categoria se edito");
             return ResponseEntity.ok(response);
+        }else{
+            response.put("message", "La categoria esta duplicada");
+            response.put("err", "Error al intentar crear la categoria");
+            return ResponseEntity.badRequest().body(response);
+        }
         } catch (Exception e) {
             response.put("message", "La categoria no se pudo edito");
             response.put("err", "Error al intentar editar la categoria");
