@@ -32,6 +32,15 @@ public class CategoriaService implements ICategoriaService{
          categoriaRepository.delete(categoria);
     }
 
-
+    public Boolean verificarCategoriaDuplicada(Categoria categoria) {
+        Boolean flag = Boolean.FALSE;
+        List<Categoria> categorias = ListarCategoria();
+        for(Categoria c : categorias){
+            if(c.getNombre().equals(categoria.getNombre()) && !c.getId().equals(categoria.getId())){
+                flag = Boolean.TRUE;
+            }
+        }
+        return flag;
+    }
 
 }

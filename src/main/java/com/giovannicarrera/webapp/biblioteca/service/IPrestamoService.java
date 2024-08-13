@@ -6,11 +6,18 @@ import com.giovannicarrera.webapp.biblioteca.model.Prestamo;
 
 public interface IPrestamoService {
 
-    public List<Prestamo> ListarLibro();
+    public List<Prestamo> ListarPrestamo();
 
-    public void guardarLibro(Prestamo prestamo);
+    public void guardarPrestamo(Prestamo prestamo);
     
-    public Prestamo busLibroPorId(Long id);
+    public Prestamo busPrestamoPorId(Long id);
 
-    public void eliminarLibro(Prestamo prestamo);
+    public void eliminarPrestamo(Prestamo prestamo);
+
+    public Boolean verificarMasDeTresLibros(Prestamo prestamo);
+
+    public Boolean verificarUsuarioPrestamoVigente(Prestamo prestamo);
+
+    public Boolean verificarSiLibroEstaDisponible(Prestamo prestamo);
+
 }

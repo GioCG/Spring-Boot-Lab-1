@@ -12,5 +12,5 @@ public interface ILibroService {
     
     public Libro busLibroPorId(Long id);
 
-    public void eliminarLibro(Libro libro);
+    public void eliminarLibro(Libro libro);    
 }

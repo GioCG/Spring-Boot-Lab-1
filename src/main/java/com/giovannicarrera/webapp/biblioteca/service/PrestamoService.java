@@ -15,22 +15,39 @@ public class PrestamoService implements IPrestamoService{
     PrestamoRepository prestamoRepository;
 
     @Override
-    public List<Prestamo> ListarLibro() {
+    public List<Prestamo> ListarPrestamo() {
         return prestamoRepository.findAll();
     }
 
     @Override
-    public void guardarLibro(Prestamo prestamo) {
+    public void guardarPrestamo(Prestamo prestamo) {
         prestamoRepository.save(prestamo);
     }
 
     @Override
-    public Prestamo busLibroPorId(Long id) {
+    public Prestamo busPrestamoPorId(Long id) {
        return prestamoRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void eliminarLibro(Prestamo prestamo) {
+    public void eliminarPrestamo(Prestamo prestamo) {
         prestamoRepository.delete(prestamo);
+    }
+
+    public Boolean verificarMasDeTresLibros(Prestamo prestamo) {
+        Boolean flag = Boolean.FALSE;
+        return flag;
+    }
+
+    @Override
+    public Boolean verificarUsuarioPrestamoVigente(Prestamo prestamo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'verificarUsuarioPrestamoVigente'");
+    }
+
+    @Override
+    public Boolean verificarSiLibroEstaDisponible(Prestamo prestamo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'verificarSiLibroEstaDisponible'");
     }
 }

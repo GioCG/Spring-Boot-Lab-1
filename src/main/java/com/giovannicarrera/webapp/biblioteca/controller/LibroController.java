@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.giovannicarrera.webapp.biblioteca.model.Libro;
@@ -67,11 +66,11 @@ public class LibroController {
 
     //editar
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String,String>> editarLibro(@RequestParam Long id, @RequestBody Libro libroNuevo){
+    public ResponseEntity<Map<String,String>> editarLibro(@PathVariable Long id,@RequestBody Libro libroNuevo){
         Map<String,String> response = new HashMap<>();
         try {
             Libro libro = libroService.busLibroPorId(id);
-            libro.setAutor((libroNuevo.getAutor()));
+            libro.setAutor(libroNuevo.getAutor());
             libro.setCategoria(libroNuevo.getCategoria());
             libro.setCluster(libroNuevo.getCluster());
             libro.setDisponibilidad(libroNuevo.getDisponibilidad());
@@ -89,7 +88,6 @@ public class LibroController {
             return ResponseEntity.badRequest().body(response);
         }
     }
-
     //eliminar
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String,String>> eliminarLibro(@PathVariable Long id){

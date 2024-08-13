@@ -53,9 +53,16 @@ public class EmpleadoController {
     public ResponseEntity<Map<String,String>> agregarEmpleado(@RequestBody Empleado empleado){
         Map<String,String> response = new HashMap<>();
         try {
-            empleadoService.guardarEmpleado(empleado);
-            response.put("message","El empleado fue creada");
-            return ResponseEntity.ok(response);
+            if(!empleadoService.verificarDpiDuplicado(empleado)){
+                empleadoService.guardarEmpleado(empleado);
+                response.put("message","El empleado fue creada");
+                return ResponseEntity.ok(response);
+            }else{
+                response.put("message","Error");
+                response.put("err","El DPI del empleado esta duplicado");
+                return ResponseEntity.badRequest().body(response);
+            }
+            
         } catch (Exception e) {
             response.put("message","Error");
             response.put("err","Error al crear el Empleado");
@@ -70,14 +77,20 @@ public class EmpleadoController {
         Map<String,String> response = new HashMap<>();
         try {
             Empleado empleado = empleadoService.busEmpleadoPorId(id);
-            empleado.setNombre(empleadoNuevo.getNombre());
-            empleado.setApellido(empleadoNuevo.getApellido());
-            empleado.setTelefóno(empleadoNuevo.getTelefóno());
-            empleado.setDireccion(empleadoNuevo.getDireccion());
-            empleado.setDPI(empleadoNuevo.getDPI());
-            empleadoService.guardarEmpleado(empleado);
-            response.put("message", "El empleado se edito");
-            return ResponseEntity.ok(response);
+                if(!empleadoService.verificarDpiDuplicado(empleado)){
+                empleado.setNombre(empleadoNuevo.getNombre());
+                empleado.setApellido(empleadoNuevo.getApellido());
+                empleado.setTelefóno(empleadoNuevo.getTelefóno());
+                empleado.setDireccion(empleadoNuevo.getDireccion());
+                empleado.setDPI(empleadoNuevo.getDPI());
+                empleadoService.guardarEmpleado(empleado);
+                response.put("message", "El empleado se edito");
+                return ResponseEntity.ok(response);
+            }else{
+                response.put("message","Error");
+                response.put("err","El DPI del empleado esta duplicado");
+                return ResponseEntity.badRequest().body(response);
+            }
         } catch (Exception e) {
             response.put("message", "El empleado se edito");
             response.put("err", "Error al intentar editar el empleado");
