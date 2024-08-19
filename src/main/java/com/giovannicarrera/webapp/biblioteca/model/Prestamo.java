@@ -24,7 +24,7 @@ public class Prestamo {
     private Long id;
     private Date fechaDePrestamo;
     private Date fechaDeRevolucion;
-    private Boolean vigencia;
+    private Boolean vigencia = Boolean.FALSE;
 
     @ManyToOne
     private Cliente cliente;

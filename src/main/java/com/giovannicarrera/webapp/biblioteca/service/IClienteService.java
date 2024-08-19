@@ -13,4 +13,7 @@ public interface IClienteService {
     public Cliente busClientePorId(Long DPI);
 
     public void eliminarCliente(Cliente cliente);
+
+    public Boolean verificarDpiDuplicado(Cliente cliente);
+
 }

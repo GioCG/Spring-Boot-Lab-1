@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.giovannicarrera.webapp.biblioteca.model.Libro;
 import com.giovannicarrera.webapp.biblioteca.model.Prestamo;
 import com.giovannicarrera.webapp.biblioteca.repository.PrestamoRepository;
 
@@ -13,6 +14,7 @@ public class PrestamoService implements IPrestamoService{
 
     @Autowired 
     PrestamoRepository prestamoRepository;
+    Libro libro;
 
     @Override
     public List<Prestamo> ListarPrestamo() {
@@ -35,19 +37,34 @@ public class PrestamoService implements IPrestamoService{
     }
 
     public Boolean verificarMasDeTresLibros(Prestamo prestamo) {
-        Boolean flag = Boolean.FALSE;
-        return flag;
+        Integer i=0;
+        List<Prestamo> prestamos = ListarPrestamo();
+        for(Prestamo c: prestamos){
+            if(c.getVigencia().equals(Boolean.TRUE) && !c.getId().equals(prestamo.getId())){
+                i++;
+            }
+        }
+        return i >= 3;
+    }
+    
+    @Override
+    public Boolean verificarUsuarioPrestamoVigente(Long dpi) {
+        List<Prestamo> prestamos = ListarPrestamo();
+    for (Prestamo prestamo : prestamos) {
+        if (prestamo.getCliente() != null && prestamo.getCliente().getDPI().equals(dpi) && prestamo.getVigencia().equals(Boolean.TRUE)) {
+            return true;
+        }
     }
 
-    @Override
-    public Boolean verificarUsuarioPrestamoVigente(Prestamo prestamo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'verificarUsuarioPrestamoVigente'");
-    }
+    return false;
+}
 
-    @Override
     public Boolean verificarSiLibroEstaDisponible(Prestamo prestamo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'verificarSiLibroEstaDisponible'");
+        Boolean flag = Boolean.FALSE;
+        if(((Libro) prestamo.getLibro()).getId().equals(libro.getId()) && libro.getDisponibilidad().equals(Boolean.TRUE)){
+            flag = Boolean.TRUE;
+
+        }
+        return flag;
     }
 }

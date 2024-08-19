@@ -16,7 +16,7 @@ public interface IPrestamoService {
 
     public Boolean verificarMasDeTresLibros(Prestamo prestamo);
 
-    public Boolean verificarUsuarioPrestamoVigente(Prestamo prestamo);
+    public Boolean verificarUsuarioPrestamoVigente(Long dpi);
 
     public Boolean verificarSiLibroEstaDisponible(Prestamo prestamo);
 
