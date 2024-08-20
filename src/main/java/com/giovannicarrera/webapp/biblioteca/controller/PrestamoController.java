@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.giovannicarrera.webapp.biblioteca.model.Libro;
 import com.giovannicarrera.webapp.biblioteca.model.Prestamo;
 import com.giovannicarrera.webapp.biblioteca.service.ClienteService;
 import com.giovannicarrera.webapp.biblioteca.service.LibroService;
@@ -24,6 +24,7 @@ import com.giovannicarrera.webapp.biblioteca.service.PrestamoService;
 @Controller
 @RestController
 @RequestMapping("prestamo")
+@CrossOrigin(value ="http://127.0.0.1:5500")
 public class PrestamoController {
 
     @Autowired
